@@ -1,6 +1,5 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-ARG BUILD_ARCH
-FROM ghcr.io/home-assistant/${BUILD_ARCH}-base:3.15
+FROM ghcr.io/home-assistant/aarch64-base:3.15
 
 # Execute during the build of the image
 ARG TEMPIO_VERSION BUILD_ARCH
