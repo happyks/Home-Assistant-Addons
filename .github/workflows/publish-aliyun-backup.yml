@@ -14,14 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: docker/login-action@v2
+      - uses: home-assistant/builder/actions/build-image@2026.03.2
         with:
-          registry: ghcr.io
-          username: happyks
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: home-assistant/builder@master
-        with:
-          args: |
-            --all \
-            --target addons/aliyun_backup \
-            --docker-hub ghcr.io/happyks
+          context: addons/aliyun_backup
+          image: ghcr.io/happyks/addon-aliyun-backup
+          version: "1.0.16"
+          architectures: "aarch64,amd64"
