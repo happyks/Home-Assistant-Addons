@@ -6,6 +6,7 @@ description: AliyunDrive Backup
 url: "https://sumju.net"
 arch:
   - aarch64
+  - amd64
 init: false
 hassio_api: true
 hassio_role: backup
