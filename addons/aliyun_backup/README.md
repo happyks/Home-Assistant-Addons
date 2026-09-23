@@ -12,7 +12,7 @@
 
 # 阿里云盘每日自动备份插件 / Aliyun Drive Daily Backup
 
-![Aliyun Image](https://github.com/5high/Home-Assistant-Addons/blob/main/addons/images/aliyun.png?raw=true)
+![Aliyun Image](https://github.com/happyks/Home-Assistant-Addons/blob/main/addons/images/aliyun.png?raw=true)
 
 ## 使用方法
 
