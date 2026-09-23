@@ -1,4 +1,7 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
+## 1.0.16
+
+- 优化备份计划
 ## 1.0.15
 
 - 修复大陆地区无法使用问题
