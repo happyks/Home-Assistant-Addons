@@ -1,11 +1,6 @@
 name: "Publish Aliyun Backup"
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'addons/aliyun_backup/**'
   workflow_dispatch:
 
 jobs:
