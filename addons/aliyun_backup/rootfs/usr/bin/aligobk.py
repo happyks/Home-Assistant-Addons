@@ -181,6 +181,14 @@ with open(config+'options.json', 'r') as file:
 for key, value in options_data.items():
     globals()[key] = value
 
+# ⭐ 修改：保证 7 个勾选键一定存在（旧配置升级时缺失）
+for _day in (
+    "backup_monday", "backup_tuesday", "backup_wednesday",
+    "backup_thursday", "backup_friday", "backup_saturday", "backup_sunday",
+):
+    if _day not in globals():
+        globals()[_day] = False
+
 # 用于生成HTML的函数
 def generate_html_listcloud():
     global user, space
@@ -227,21 +235,6 @@ def generate_html_listcloud():
     """
     html_content += f"""
         <h2>{user} 您的剩余空间还有: {space}</h2>
-    """
-    html_content += f"""
-        <style>
-            a {{
-                text-decoration: none;
-                color: #808080;  /* 设置超链接的颜色，可以根据需要修改 */
-            }}
-        </style>
-        <marquee behavior="alternate" direction="left" scrollamount="5">
-            <a href="https://sumju.net/?p=7943" target="_blank">【官方硬件优惠卷，最高可省60元～】</a>
-            <a href="https://sumju.net/?p=8022" target="_blank">【大陆地区优化版本HassOS】</a>
-            <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=NDQnzpDKRzaB7EMzQdPuU1yQPTN248-P&authKey=cjGRmNWaFSrUh%2B6yTOD0OtmmmzaJz93%2BRAC%2BQK6yBROTbYZ6PsLSJUOgIlt%2B41BK&noverify=0&group_code=248505081" target="_blank">【加QQ交流群】</a>
-            <a href="https://sumju.net/" target="_blank">【插件作者博客】</a>
-            <a href="https://space.bilibili.com/441936678" target="_blank">【B站频道首页】</a>
-        </marquee>
     """
     html_content += """
         <table>
@@ -726,6 +719,7 @@ def loginprocess():
                     http_thread.join()
                     restart_program()
 
+# ⭐ 修改：按勾选的星期几注册定时任务
 def create_threa_afterlogin():
     # 创建循环检查云盘空间线程
     space_thread = threading.Thread(target=check_space_periodically, daemon=True)
@@ -733,8 +727,26 @@ def create_threa_afterlogin():
     # 创建一个线程来执行定时任务
     run_schedule = threading.Thread(target=running_schedule, name="schedule", daemon=True)
     run_schedule.start()
-    # 设置计划任务执行备份
-    schedule.every().day.at(backup_time).do(simulate_backup)
+
+    # 按勾选的星期几注册定时任务
+    weekday_map = {
+        "backup_monday": schedule.every().monday,
+        "backup_tuesday": schedule.every().tuesday,
+        "backup_wednesday": schedule.every().wednesday,
+        "backup_thursday": schedule.every().thursday,
+        "backup_friday": schedule.every().friday,
+        "backup_saturday": schedule.every().saturday,
+        "backup_sunday": schedule.every().sunday,
+    }
+    registered = 0
+    for key, job in weekday_map.items():
+        if globals().get(key, False):
+            job.at(backup_time).do(simulate_backup)
+            registered += 1
+    if registered == 0:
+        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " 未勾选任何备份日期，不会自动备份 ... ")
+    else:
+        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + f" 已注册 {registered} 天的定时备份任务 ... ")
 
 def filter_and_print_date(records, key_name, num_to_keep):
     sorted_records = sorted(records, key=itemgetter('date'), reverse=True)
