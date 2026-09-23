@@ -20,5 +20,6 @@ jobs:
         with:
           args: |
             --aarch64 \
+            --amd64 \
             --target addons/aliyun_backup \
             --docker-hub ghcr.io/happyks
