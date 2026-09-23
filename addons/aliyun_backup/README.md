@@ -16,7 +16,7 @@
 
 ## 使用方法
 
-1. 在插件库的右上角选择添加: https://github.com/5high/home-assistant-addons
+1. 在插件库的右上角选择添加: https://github.com/happyks/home-assistant-addons
    ![Aliyun Image](https://github.com/5high/Home-Assistant-Addons/blob/main/addons/images/add.png?raw=true)
 2. 选择 Aliyun Drive Backup 点击安装
    ![Aliyun Image](https://github.com/5high/Home-Assistant-Addons/blob/main/addons/images/install.png?raw=true)
