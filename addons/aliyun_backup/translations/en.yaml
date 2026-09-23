@@ -1,12 +1,12 @@
 configuration:
   keep_days_local:
-    name: Keep Days Local
+    name: Keep Numbers Local
     description: >-
-      How many days you want to keep the backup files on local disk.
+      How many Numbers you want to keep the backup files on local disk.
   keep_days_cloud:
-    name: Keep Days Cloud
+    name: Keep Numbers Cloud
     description: >-
-      How many days you want to keep the backup files on cloud disk.
+      How many Numbers you want to keep the backup files on cloud disk.
   backup_time:
     name: Backup Time
     description: >-
@@ -15,3 +15,24 @@ configuration:
     name: Destination Folder
     description: >-
       Which folder name you want to store backup files .
+  backup_monday:
+    name: Monday
+    description: Run backup every Monday at backup time
+  backup_tuesday:
+    name: Tuesday
+    description: Run backup every Tuesday at backup time
+  backup_wednesday:
+    name: Wednesday
+    description: Run backup every Wednesday at backup time
+  backup_thursday:
+    name: Thursday
+    description: Run backup every Thursday at backup time
+  backup_friday:
+    name: Friday
+    description: Run backup every Friday at backup time
+  backup_saturday:
+    name: Saturday
+    description: Run backup every Saturday at backup time
+  backup_sunday:
+    name: Sunday
+    description: Run backup every Sunday at backup time
