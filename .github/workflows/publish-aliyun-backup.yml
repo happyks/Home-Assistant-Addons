@@ -17,11 +17,11 @@ jobs:
       - uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: 5high
-          password: ${{ secrets.PACKAGE_TOKEN }}
+          username: happyks
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: home-assistant/builder@master
         with:
           args: |
             --all \
             --target addons/aliyun_backup \
-            --docker-hub ghcr.io/5high
+            --docker-hub ghcr.io/happyks
