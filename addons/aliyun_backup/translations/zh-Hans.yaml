@@ -1,9 +1,9 @@
 configuration:
   keep_days_local:
-    name: 本地保存天数
+    name: 本地保存个数
     description: 您希望保留在本地磁盘的备份数量
   keep_days_cloud:
-    name: 云盘保存天数
+    name: 云盘保存个数
     description: 您希望保留在阿里云盘的备份数量
   backup_time:
     name: 备份上传时间
@@ -11,3 +11,24 @@ configuration:
   folder_name:
     name: 目标文件夹
     description: 用来存放备份文件的文件夹名称，位于网盘根目录 .
+  backup_monday:
+    name: 周一
+    description: 勾选后每周一在备份时间执行一次备份
+  backup_tuesday:
+    name: 周二
+    description: 勾选后每周二在备份时间执行一次备份
+  backup_wednesday:
+    name: 周三
+    description: 勾选后每周三在备份时间执行一次备份
+  backup_thursday:
+    name: 周四
+    description: 勾选后每周四在备份时间执行一次备份
+  backup_friday:
+    name: 周五
+    description: 勾选后每周五在备份时间执行一次备份
+  backup_saturday:
+    name: 周六
+    description: 勾选后每周六在备份时间执行一次备份
+  backup_sunday:
+    name: 周日
+    description: 勾选后每周日在备份时间执行一次备份
