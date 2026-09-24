@@ -1,5 +1,5 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
-## 1.0.17
+## 1.0.18
 
 - 修复bug
 ## 1.0.16
