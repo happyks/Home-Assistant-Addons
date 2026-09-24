@@ -40,4 +40,4 @@ schema:
   backup_friday: bool
   backup_saturday: bool
   backup_sunday: bool
-image: "ghcr.io/happyks/addon-aliyun-backup"
+image: "ghcr.io/happyks/{arch}-addon-aliyun-backup"
