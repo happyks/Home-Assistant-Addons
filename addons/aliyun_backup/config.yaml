@@ -40,4 +40,4 @@ schema:
   backup_friday: bool
   backup_saturday: bool
   backup_sunday: bool
-image: "crpi-dueqxker1mea7cgx.cn-hangzhou.personal.cr.aliyuncs.com/happyks/{arch}-addon-aliyun-backup"
+image: "crpi-dueqxkerlmea7cgx.cn-hangzhou.personal.cr.aliyuncs.com/happyks/{arch}-addon-aliyun-backup"
