@@ -181,13 +181,41 @@ with open(config+'options.json', 'r') as file:
 for key, value in options_data.items():
     globals()[key] = value
 
-# ⭐ 修改：保证 7 个勾选键一定存在（旧配置升级时缺失）
+# ⭐ 保证 7 个勾选键一定存在（旧配置升级时缺失）
 for _day in (
     "backup_monday", "backup_tuesday", "backup_wednesday",
     "backup_thursday", "backup_friday", "backup_saturday", "backup_sunday",
 ):
     if _day not in globals():
         globals()[_day] = False
+
+
+def build_schedule_description():
+    """根据勾选的星期几，生成备份计划描述"""
+    weekday_map = [
+        ("backup_monday", "周一"),
+        ("backup_tuesday", "周二"),
+        ("backup_wednesday", "周三"),
+        ("backup_thursday", "周四"),
+        ("backup_friday", "周五"),
+        ("backup_saturday", "周六"),
+        ("backup_sunday", "周日"),
+    ]
+
+    selected = []
+    for key, label in weekday_map:
+        if globals().get(key, False):
+            selected.append(label)
+
+    if not selected:
+        return "未勾选任何备份日期，不会自动备份"
+
+    if len(selected) == 7:
+        return f"每天 {backup_time} 执行自动备份"
+    else:
+        days = "、".join(selected)
+        return f"每周 {days} 的 {backup_time} 执行自动备份"
+
 
 # 用于生成HTML的函数
 def generate_html_listcloud():
@@ -255,23 +283,21 @@ def generate_html_listcloud():
             </tbody>
         </table>
         <div class="info">
-
-            """
+    """
     if sign_in_count is not None:
         html_content += f"<h3>您本月已经签到 {sign_in_count} 次</h3>"
-    html_content += """
-            <p>每日备份时间：{backup_time}</p>
+
+    schedule_desc = build_schedule_description()
+
+    html_content += f"""
+            <p>备份计划：{schedule_desc}</p>
             <p>本地保留数量：{keep_days_local}</p>
             <p>云盘保存数量：{keep_days_cloud}</p>
             <p>如需修改备份设置，请在插件的配置页面进行修改。</p>
         </div>
     </body>
     </html>
-    """.format(
-        backup_time=backup_time,
-        keep_days_local=keep_days_local,
-        keep_days_cloud=keep_days_cloud
-    )
+    """
 
     return html_content
 
@@ -719,7 +745,6 @@ def loginprocess():
                     http_thread.join()
                     restart_program()
 
-# ⭐ 修改：按勾选的星期几注册定时任务
 def create_threa_afterlogin():
     # 创建循环检查云盘空间线程
     space_thread = threading.Thread(target=check_space_periodically, daemon=True)
